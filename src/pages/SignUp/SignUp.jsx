@@ -12,7 +12,7 @@ import { Link } from "react-router-dom";
 import { AuthContext } from "../../providers/AuthProvider";
 
 function SignUp() {
-  const { createUser } = useContext(AuthContext);
+  const { createUser, logInWithGoogle } = useContext(AuthContext);
   const [error, setError] = useState(null);
   const [success, setSuccess] = useState(null);
 
@@ -34,6 +34,19 @@ function SignUp() {
         setSuccess(`Sign up successfully`);
       })
       .catch((error) => setError(error.code));
+  };
+
+  const handleSignInWithGoogle = () => {
+    setError(null);
+    setSuccess(null);
+
+    logInWithGoogle()
+      .then(() => {
+        setSuccess("Sign up with Google successfully");
+      })
+      .catch((error) => {
+        setError(error.code);
+      });
   };
 
   return (
@@ -95,6 +108,24 @@ function SignUp() {
           <Button type="submit" className="mt-6" fullWidth>
             SignUp
           </Button>
+          {/* Social Logins */}
+          <div className="flex flex-col items-center gap-4 mt-4">
+            <Button
+              onClick={handleSignInWithGoogle}
+              size="lg"
+              variant="outlined"
+              color="blue-gray"
+              className="flex items-center gap-3"
+            >
+              <img
+                src="https://www.material-tailwind.com/icons/google.svg"
+                alt="metamask"
+                className="h-6 w-6"
+              />
+              Continue with Google
+            </Button>
+          </div>
+
           <Typography color="gray" className="mt-4 text-center font-normal">
             Already have an account?
             <Link className="font-medium text-gray-900" to={"/login"}>

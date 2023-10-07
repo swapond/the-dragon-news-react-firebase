@@ -1,7 +1,6 @@
 import React, { useContext, useState } from "react";
 import { Card, Input, Button, Typography } from "@material-tailwind/react";
 import Navbar from "../shared/Navbar/Navbar";
-import { signInWithEmailAndPassword } from "firebase/auth";
 import { Link } from "react-router-dom";
 import { AuthContext } from "../../providers/AuthProvider";
 
@@ -9,6 +8,7 @@ function Login() {
   const { signInUser } = useContext(AuthContext);
   const [error, setError] = useState(null);
   const [success, setSuccess] = useState(null);
+  const { logInWithGoogle } = useContext(AuthContext);
 
   const handleLogin = (e) => {
     e.preventDefault();
@@ -27,6 +27,19 @@ function Login() {
         setSuccess(`Sign in successfully`);
       })
       .catch((error) => setError(error.code));
+  };
+
+  const handleSignInWithGoogle = () => {
+    setError(null);
+    setSuccess(null);
+
+    logInWithGoogle()
+      .then(() => {
+        setSuccess("Sign up with Google successfully");
+      })
+      .catch((error) => {
+        setError(error.code);
+      });
   };
 
   return (
@@ -68,6 +81,25 @@ function Login() {
           <Button type="submit" className="mt-6" fullWidth>
             Login
           </Button>
+
+          {/* Social Logins */}
+          <div className="flex flex-col items-center gap-4 mt-4">
+            <Button
+              onClick={handleSignInWithGoogle}
+              size="lg"
+              variant="outlined"
+              color="blue-gray"
+              className="flex items-center gap-3"
+            >
+              <img
+                src="https://www.material-tailwind.com/icons/google.svg"
+                alt="metamask"
+                className="h-6 w-6"
+              />
+              Continue with Google
+            </Button>
+          </div>
+
           <Typography color="gray" className="mt-4 text-center font-normal">
             Don't have an account?
             <Link className="font-medium text-gray-900" to={"/signup"}>

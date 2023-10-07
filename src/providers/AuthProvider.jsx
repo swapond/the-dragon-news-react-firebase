@@ -33,7 +33,12 @@ function AuthProvider({ children }) {
       console.log("Observing current user: ", currentUser);
       setLoading(false);
     });
-  });
+
+    // Cleanup function for avoid memory leaks
+    return () => {
+      unSubscribe();
+    };
+  }, []);
 
   const authInfo = { user, loading, createUser, signInUser, logOutUser };
 

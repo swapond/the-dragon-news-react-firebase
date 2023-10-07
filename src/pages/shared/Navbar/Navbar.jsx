@@ -1,8 +1,11 @@
-import React from "react";
+import React, { useContext } from "react";
 import { Link, NavLink } from "react-router-dom";
 import userDefaultPicture from "../../../assets/user.png";
+import { AuthContext } from "../../../providers/AuthProvider";
+import { Button } from "@material-tailwind/react";
 
 function Navbar() {
+  const { user, logOutUser } = useContext(AuthContext);
   const navLinks = (
     <>
       <li>
@@ -16,6 +19,10 @@ function Navbar() {
       </li>
     </>
   );
+
+  const handleLogOut = () => {
+    logOutUser();
+  };
   return (
     <div className="navbar bg-base-100">
       <div className="navbar-start">
@@ -53,9 +60,15 @@ function Navbar() {
             <img src={userDefaultPicture} />
           </div>
         </label>
-        <Link to={"/login"} className="btn">
-          Login
-        </Link>
+        {user ? (
+          <Button variant="outlined" onClick={handleLogOut}>
+            Logout
+          </Button>
+        ) : (
+          <Link to={"/login"}>
+            <Button variant="outlined">Login</Button>
+          </Link>
+        )}
       </div>
     </div>
   );

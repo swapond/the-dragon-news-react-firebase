@@ -13,6 +13,8 @@ function CategoryNews() {
   const [newsItems, setNewsItems] = useState([]);
   const data = useLoaderData();
 
+  console.log(categoryId);
+
   useEffect(() => {
     if (categoryId === "0") {
       // Display all news items

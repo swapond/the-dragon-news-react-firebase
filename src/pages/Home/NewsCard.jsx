@@ -21,44 +21,57 @@ function NewsCard({ news }) {
   console.log(news);
 
   return (
-    <div>
-      <Card className="md:max-w-[24rem] lg:max-w-full overflow-hidden">
-        <CardHeader
-          floated={false}
-          shadow={false}
-          color="transparent"
-          className="m-0 rounded-none"
-        >
-          <img className="w-full h-[180px] object-cover" src={thumbnail_url} />
-        </CardHeader>
-        <CardBody>
-          <Link to={`/news/${_id}`}>
-            <Typography title={title} variant="h4" color="blue-gray">
-              {shortTitle}...
-            </Typography>
-          </Link>
-          <Typography variant="lead" color="gray" className="mt-3 font-normal">
-            {`${details.slice(0, 100)}...`}
-          </Typography>
-        </CardBody>
-        <CardFooter className="flex items-center justify-between">
-          <div className="flex items-center -space-x-3">
-            <Tooltip content={author.name}>
-              <Avatar
-                size="sm"
-                variant="circular"
-                alt={author.name}
-                src={author.img}
-                className="border-2 border-white hover:z-10"
+    <>
+      {news.length === 0 ? (
+        <p>No News Found</p>
+      ) : (
+        <div>
+          <Card className="md:max-w-[24rem] lg:max-w-full overflow-hidden">
+            <CardHeader
+              floated={false}
+              shadow={false}
+              color="transparent"
+              className="m-0 rounded-none"
+            >
+              <img
+                className="w-full h-[180px] object-cover"
+                src={thumbnail_url}
               />
-            </Tooltip>
-          </div>
-          <Typography className="font-normal">
-            {formatDate(author.published_date)}
-          </Typography>
-        </CardFooter>
-      </Card>
-    </div>
+            </CardHeader>
+            <CardBody>
+              <Link to={`/news/${_id}`}>
+                <Typography title={title} variant="h4" color="blue-gray">
+                  {shortTitle}...
+                </Typography>
+              </Link>
+              <Typography
+                variant="lead"
+                color="gray"
+                className="mt-3 font-normal"
+              >
+                {`${details.slice(0, 100)}...`}
+              </Typography>
+            </CardBody>
+            <CardFooter className="flex items-center justify-between">
+              <div className="flex items-center -space-x-3">
+                <Tooltip content={author.name}>
+                  <Avatar
+                    size="sm"
+                    variant="circular"
+                    alt={author.name}
+                    src={author.img}
+                    className="border-2 border-white hover:z-10"
+                  />
+                </Tooltip>
+              </div>
+              <Typography className="font-normal">
+                {formatDate(author.published_date)}
+              </Typography>
+            </CardFooter>
+          </Card>
+        </div>
+      )}
+    </>
   );
 }
 

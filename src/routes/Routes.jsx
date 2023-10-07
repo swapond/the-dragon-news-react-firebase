@@ -5,6 +5,7 @@ import Login from "../pages/Login/Login";
 import SignUp from "../pages/Signup/Signup";
 import News from "../pages/News/News";
 import PrivateRoute from "./PrivateRoute";
+import CategoryNews from "../pages/CategoryNews/CategoryNews";
 
 const router = createBrowserRouter([
   {
@@ -33,6 +34,11 @@ const router = createBrowserRouter([
       {
         path: "/signup",
         element: <SignUp></SignUp>,
+      },
+      {
+        path: "/category/:categoryId",
+        element: <CategoryNews></CategoryNews>,
+        loader: () => fetch("/data/news.json"),
       },
     ],
   },

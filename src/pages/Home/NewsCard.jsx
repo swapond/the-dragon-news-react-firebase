@@ -18,6 +18,7 @@ function NewsCard({ news }) {
     const date = new Date(inputDate);
     return date.toLocaleDateString("en-US", options);
   };
+  console.log(news);
 
   return (
     <div>

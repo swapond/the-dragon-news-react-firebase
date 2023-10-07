@@ -21,7 +21,7 @@ function NewsCard({ news }) {
 
   return (
     <div>
-      <Card className="max-w-[24rem] overflow-hidden">
+      <Card className="md:max-w-[24rem] lg:max-w-full overflow-hidden">
         <CardHeader
           floated={false}
           shadow={false}

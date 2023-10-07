@@ -1,15 +1,19 @@
 import React from "react";
 import Header from "../shared/Header/Header";
 import Navbar from "../shared/Navbar/Navbar";
-import { useParams } from "react-router-dom";
+import { useLoaderData, useParams } from "react-router-dom";
+import NewsCard from "./NewsCard";
 
 function News() {
   const { id } = useParams();
+  const data = useLoaderData();
+  const currentNews = data.filter((currentData) => currentData._id === id);
+  console.log(currentNews);
   return (
     <>
       <Header></Header>
       <Navbar></Navbar>
-      {id}
+      <NewsCard currentNews={currentNews}></NewsCard>
     </>
   );
 }

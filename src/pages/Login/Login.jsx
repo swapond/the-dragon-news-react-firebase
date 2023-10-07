@@ -1,7 +1,7 @@
 import React, { useContext, useState } from "react";
 import { Card, Input, Button, Typography } from "@material-tailwind/react";
 import Navbar from "../shared/Navbar/Navbar";
-import { Link } from "react-router-dom";
+import { Link, Navigate, useLocation, useNavigate } from "react-router-dom";
 import { AuthContext } from "../../providers/AuthProvider";
 
 function Login() {
@@ -9,6 +9,11 @@ function Login() {
   const [error, setError] = useState(null);
   const [success, setSuccess] = useState(null);
   const { logInWithGoogle } = useContext(AuthContext);
+  // Use useNavigate to get the navigation function
+  const navigate = useNavigate();
+  //   This is the state come from the news
+  const location = useLocation();
+  console.log(location);
 
   const handleLogin = (e) => {
     e.preventDefault();
@@ -25,6 +30,8 @@ function Login() {
       .then((userCredential) => {
         const user = userCredential.user;
         setSuccess(`Sign in successfully`);
+        // navigate after login
+        navigate(location?.state ? location.state : "/");
       })
       .catch((error) => setError(error.code));
   };
@@ -36,6 +43,11 @@ function Login() {
     logInWithGoogle()
       .then(() => {
         setSuccess("Sign up with Google successfully");
+
+        // navigate after login
+        navigate(location?.state ? location.state : "/");
+
+        // /news/postId
       })
       .catch((error) => {
         setError(error.code);

@@ -57,7 +57,7 @@ function Navbar() {
       <div className="navbar-end">
         <label tabIndex={0} className="btn btn-ghost btn-circle avatar">
           <div className="w-10 rounded-full">
-            <img src={userDefaultPicture} />
+            <img src={user?.photoURL ? user.photoURL : userDefaultPicture} />
           </div>
         </label>
         {user ? (

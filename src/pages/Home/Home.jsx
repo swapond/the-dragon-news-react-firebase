@@ -4,6 +4,7 @@ import Navbar from "../shared/Navbar/Navbar";
 import Slider from "./Slider";
 import RightSidebar from "../shared/RightSidebar/RightSidebar";
 import LeftSidebar from "../shared/LeftSidebar/LeftSidebar";
+import NewsContainer from "./NewsContainer";
 
 function Home() {
   return (
@@ -15,7 +16,9 @@ function Home() {
         <div>
           <LeftSidebar></LeftSidebar>
         </div>
-        <div className=" md:col-span-2"></div>
+        <div className=" md:col-span-2">
+          <NewsContainer></NewsContainer>
+        </div>
         <div>
           <RightSidebar></RightSidebar>
         </div>
